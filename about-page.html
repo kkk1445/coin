@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코인타임 - 회사 소개</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* 페이지별 추가 스타일 */
+        .about-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .about-section {
+            margin-bottom: 3rem;
+        }
+
+        .about-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .about-section p {
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 50%;
+            padding: 0 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 1rem;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 3rem;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">코인타임</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">홈</a></li>
+                    <li><a href="staking-page.html" class="nav-link">스테이킹</a></li>
+                    <li><a href="inquiry-page.html" class="nav-link">1:1 문의</a></li>
+                    <li><a href="about-page.html" class="nav-link">회사 소개</a></li>
+                    <li id="user-nav-area">
+                        <a href="#" id="login-button">로그인</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="about-container">
+            <div class="about-section">
+                <h2>회사 소개</h2>
+                <p>코인타임은 2023년에 설립된 암호화폐 거래소입니다. 우리는 사용자들에게 안전하고 편리한 암호화폐 거래 환경을 제공하기 위해 최선을 다하고 있습니다.</p>
+                <p>우리의 핵심 가치는 투명성, 보안성, 그리고 사용자 경험입니다. 이러한 가치를 바탕으로 우리는 지속적으로 서비스를 개선하고 새로운 기능을 추가해 나가고 있습니다.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>주요 연혁</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023년 1월</div>
+                            <div class="timeline-title">회사 설립</div>
+                            <p>코인타임 설립 및 초기 팀 구성</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023년 3월</div>
+                            <div class="timeline-title">거래소 오픈</div>
+                            <p>첫 번째 거래소 버전 출시</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023년 6월</div>
+                            <div class="timeline-title">스테이킹 서비스 시작</div>
+                            <p>사용자들에게 수익 기회 제공</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023년 9월</div>
+                            <div class="timeline-title">사용자 10만명 돌파</div>
+                            <p>지속적인 성장과 발전</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>주요 서비스</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">💰</div>
+                        <div class="service-title">암호화폐 거래</div>
+                        <div class="service-description">
+                            다양한 암호화폐의 실시간 거래를 지원합니다. 안전하고 빠른 거래 환경을 제공합니다.
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📈</div>
+                        <div class="service-title">스테이킹</div>
+                        <div class="service-description">
+                            암호화폐를 예치하여 수익을 얻을 수 있는 스테이킹 서비스를 제공합니다.
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔒</div>
+                        <div class="service-title">보안 시스템</div>
+                        <div class="service-description">
+                            최신 보안 기술을 적용하여 사용자의 자산을 안전하게 보호합니다.
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💬</div>
+                        <div class="service-title">고객 지원</div>
+                        <div class="service-description">
+                            24/7 고객 지원을 통해 사용자의 문의사항을 신속하게 처리합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 로그인 모달 -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>로그인</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">아이디</label>
+                    <input type="text" id="login-username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">비밀번호</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">로그인</button>
+                <a href="register-page.html" class="btn btn-secondary" style="margin-top: 1rem;">회원가입</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- 내 정보 관리 모달 -->
+    <div id="myinfo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>내 정보 관리</h2>
+            <form id="myinfo-form">
+                <div class="form-group">
+                    <label for="myinfo-username">아이디</label>
+                    <input type="text" id="myinfo-username" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="myinfo-email">이메일</label>
+                    <input type="email" id="myinfo-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="myinfo-phone">휴대폰 번호</label>
+                    <input type="tel" id="myinfo-phone" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">변경하기</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 비밀번호 변경 모달 -->
+    <div id="pwchange-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>비밀번호 변경</h2>
+            <form id="pwchange-form">
+                <div class="form-group">
+                    <label for="pw-old">기존 비밀번호</label>
+                    <input type="password" id="pw-old" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pw-new">새 비밀번호</label>
+                    <input type="password" id="pw-new" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pw-new-confirm">새 비밀번호 확인</label>
+                    <input type="password" id="pw-new-confirm" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">비밀번호 변경</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+</body>
+</html> 

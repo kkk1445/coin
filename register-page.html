@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코인타임 - 회원가입</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --bg-gradient: linear-gradient(135deg, #3498db, #8e44ad);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 90%;
+            margin: 2rem auto;
+        }
+
+        .register-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .register-container h2 {
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .password-requirements {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .password-requirements li {
+            margin-bottom: 0.25rem;
+            position: relative;
+        }
+
+        .password-requirements li:before {
+            content: "•";
+            position: absolute;
+            left: -1rem;
+        }
+
+        .password-requirements li.valid {
+            color: var(--success);
+        }
+
+        .password-requirements li.valid:before {
+            content: "✓";
+        }
+
+        @media (max-width: 768px) {
+            .register-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">코인타임</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">홈</a></li>
+                    <li><a href="staking-page.html" class="nav-link">스테이킹</a></li>
+                    <li><a href="inquiry-page.html" class="nav-link">1:1 문의</a></li>
+                    <li><a href="about-page.html" class="nav-link">회사 소개</a></li>
+                    <li id="user-nav-area">
+                        <a href="#" id="login-button">로그인</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="register-container">
+            <h2>회원가입</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="username">아이디</label>
+                    <input type="text" id="username" class="form-control" required>
+                    <div class="error-message" id="username-error">이미 사용 중인 아이디입니다.</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" class="form-control" required>
+                    <div class="error-message" id="email-error">올바른 이메일 형식이 아닙니다.</div>
+                </div>
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" class="form-control" required>
+                    <div class="error-message" id="password-error">비밀번호는 8자 이상이어야 합니다.</div>
+                </div>
+                <div class="form-group">
+                    <label for="password-confirm">비밀번호 확인</label>
+                    <input type="password" id="password-confirm" class="form-control" required>
+                    <div class="error-message" id="password-confirm-error">비밀번호가 일치하지 않습니다.</div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">휴대폰 번호</label>
+                    <input type="tel" id="phone" class="form-control" required>
+                    <div class="error-message" id="phone-error">올바른 휴대폰 번호 형식이 아닙니다.</div>
+                </div>
+                <button type="submit" class="btn">회원가입</button>
+                <div class="login-link">
+                    이미 계정이 있으신가요? <a href="#" id="show-login">로그인</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 로그인 모달 -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>로그인</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">아이디</label>
+                    <input type="text" id="login-username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">비밀번호</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">로그인</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('register-form');
+            const showLoginButton = document.getElementById('show-login');
+
+            // 로그인 모달 표시
+            showLoginButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                showModal('login-modal');
+            });
+
+            // 회원가입 폼 제출
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const passwordConfirm = document.getElementById('password-confirm').value;
+                const phone = document.getElementById('phone').value;
+
+                // 유효성 검사
+                let isValid = true;
+                const errorMessages = {
+                    username: '이미 사용 중인 아이디입니다.',
+                    email: '올바른 이메일 형식이 아닙니다.',
+                    password: '비밀번호는 8자 이상이어야 합니다.',
+                    passwordConfirm: '비밀번호가 일치하지 않습니다.',
+                    phone: '올바른 휴대폰 번호 형식이 아닙니다.'
+                };
+
+                // 아이디 검사
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                if (users.some(user => user.username === username)) {
+                    document.getElementById('username-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('username-error').style.display = 'none';
+                }
+
+                // 이메일 검사
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    document.getElementById('email-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('email-error').style.display = 'none';
+                }
+
+                // 비밀번호 검사
+                if (password.length < 8) {
+                    document.getElementById('password-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('password-error').style.display = 'none';
+                }
+
+                // 비밀번호 확인
+                if (password !== passwordConfirm) {
+                    document.getElementById('password-confirm-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('password-confirm-error').style.display = 'none';
+                }
+
+                // 휴대폰 번호 검사
+                const phoneRegex = /^[0-9]{10,11}$/;
+                if (!phoneRegex.test(phone.replace(/\D/g, ''))) {
+                    document.getElementById('phone-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('phone-error').style.display = 'none';
+                }
+
+                if (!isValid) return;
+
+                // 사용자 정보 저장
+                const newUser = {
+                    username,
+                    email,
+                    password,
+                    phone,
+                    createdAt: new Date().toISOString()
+                };
+
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+
+                alert('회원가입이 완료되었습니다. 로그인해주세요.');
+                showModal('login-modal');
+                registerForm.reset();
+            });
+        });
+    </script>
+</body>
+</html> 

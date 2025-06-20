@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코인타임 - 1:1 문의</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* 페이지별 추가 스타일 */
+        .inquiry-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .inquiry-form {
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .secret-form {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .inquiry-list {
+            margin-top: 2rem;
+        }
+
+        .inquiry-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .inquiry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .inquiry-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .inquiry-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .inquiry-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .inquiry-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .inquiry-actions button {
+            flex: 1;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #666;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .inquiry-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .inquiry-meta {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">코인타임</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">홈</a></li>
+                    <li><a href="staking-page.html" class="nav-link">스테이킹</a></li>
+                    <li><a href="inquiry-page.html" class="nav-link">1:1 문의</a></li>
+                    <li><a href="about-page.html" class="nav-link">회사 소개</a></li>
+                    <li id="user-nav-area">
+                        <a href="#" id="login-button">로그인</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="inquiry-container">
+            <h2>1:1 문의</h2>
+            <div class="inquiry-form">
+                <form id="inquiry-form">
+                    <div class="form-group">
+                        <label for="inquiry-type">문의 유형</label>
+                        <select id="inquiry-type" class="form-control" required>
+                            <option value="">문의 유형을 선택하세요</option>
+                            <option value="account">계정 문의</option>
+                            <option value="staking">스테이킹 문의</option>
+                            <option value="trade">거래 문의</option>
+                            <option value="etc">기타 문의</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-title">제목</label>
+                        <input type="text" id="inquiry-title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-content">내용</label>
+                        <textarea id="inquiry-content" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="is-secret"> 비밀글 설정
+                        </label>
+                    </div>
+                    <div id="secret-form" class="secret-form">
+                        <div class="form-group">
+                            <label for="secret-password">비밀번호</label>
+                            <input type="password" id="secret-password" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">문의하기</button>
+                </form>
+            </div>
+            <div class="inquiry-list" id="inquiry-list">
+                <!-- 문의 목록이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 로그인 모달 -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>로그인</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">아이디</label>
+                    <input type="text" id="login-username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">비밀번호</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">로그인</button>
+                <a href="register-page.html" class="btn btn-secondary" style="margin-top: 1rem;">회원가입</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- 내 정보 관리 모달 -->
+    <div id="myinfo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>내 정보 관리</h2>
+            <form id="myinfo-form">
+                <div class="form-group">
+                    <label for="myinfo-username">아이디</label>
+                    <input type="text" id="myinfo-username" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="myinfo-email">이메일</label>
+                    <input type="email" id="myinfo-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="myinfo-phone">휴대폰 번호</label>
+                    <input type="tel" id="myinfo-phone" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">변경하기</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 비밀번호 변경 모달 -->
+    <div id="pwchange-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>비밀번호 변경</h2>
+            <form id="pwchange-form">
+                <div class="form-group">
+                    <label for="pw-old">기존 비밀번호</label>
+                    <input type="password" id="pw-old" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pw-new">새 비밀번호</label>
+                    <input type="password" id="pw-new" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pw-new-confirm">새 비밀번호 확인</label>
+                    <input type="password" id="pw-new-confirm" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">비밀번호 변경</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // 페이지별 추가 스크립트
+        document.addEventListener('DOMContentLoaded', function() {
+            const inquiryForm = document.getElementById('inquiry-form');
+            const secretForm = document.getElementById('secret-form');
+            const isSecretCheckbox = document.getElementById('is-secret');
+            const inquiryList = document.getElementById('inquiry-list');
+
+            // 비밀글 설정 토글
+            isSecretCheckbox.addEventListener('change', function() {
+                secretForm.style.display = this.checked ? 'block' : 'none';
+                document.getElementById('secret-password').required = this.checked;
+            });
+
+            // 문의 폼 제출
+            inquiryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const type = document.getElementById('inquiry-type').value;
+                const title = document.getElementById('inquiry-title').value;
+                const content = document.getElementById('inquiry-content').value;
+                const isSecret = isSecretCheckbox.checked;
+                const password = isSecret ? document.getElementById('secret-password').value : '';
+
+                if (!type || !title || !content || (isSecret && !password)) {
+                    alert('모든 필드를 입력해주세요.');
+                    return;
+                }
+
+                // localStorage에서 문의 목록 가져오기
+                const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+                
+                // 새 문의 추가
+                const newInquiry = {
+                    id: Date.now(),
+                    type,
+                    title,
+                    content,
+                    isSecret,
+                    password,
+                    userId: localStorage.getItem('currentUser'),
+                    createdAt: new Date().toISOString()
+                };
+                
+                inquiries.push(newInquiry);
+                localStorage.setItem('inquiries', JSON.stringify(inquiries));
+                
+                alert('문의가 등록되었습니다.');
+                inquiryForm.reset();
+                secretForm.style.display = 'none';
+                renderInquiries();
+            });
+
+            // 문의 목록 렌더링
+            function renderInquiries() {
+                const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+                const currentUser = localStorage.getItem('currentUser');
+                
+                inquiryList.innerHTML = '';
+                
+                if (!inquiries.length) {
+                    inquiryList.innerHTML = '<div class="empty-message">등록된 문의가 없습니다.</div>';
+                    return;
+                }
+
+                // 현재 사용자의 문의만 필터링
+                const userInquiries = inquiries.filter(inquiry => inquiry.userId === currentUser);
+                
+                if (!userInquiries.length) {
+                    inquiryList.innerHTML = '<div class="empty-message">등록된 문의가 없습니다.</div>';
+                    return;
+                }
+
+                userInquiries.forEach(inquiry => {
+                    const formattedDate = new Date(inquiry.createdAt).toLocaleString('ko-KR');
+                    const item = document.createElement('div');
+                    item.className = 'inquiry-item';
+                    item.innerHTML = `
+                        <div class="inquiry-header">
+                            <div class="inquiry-title">${inquiry.title}</div>
+                            <div class="inquiry-meta">
+                                ${formattedDate} | ${inquiry.type}
+                                ${inquiry.isSecret ? ' | 🔒 비밀글' : ''}
+                            </div>
+                        </div>
+                        <div class="inquiry-content">${inquiry.content}</div>
+                        <div class="inquiry-actions">
+                            <button class="btn btn-secondary" onclick="editInquiry(${inquiry.id})">수정</button>
+                            <button class="btn btn-danger" onclick="deleteInquiry(${inquiry.id})">삭제</button>
+                        </div>
+                    `;
+                    inquiryList.appendChild(item);
+                });
+            }
+
+            // 페이지 로드 시 문의 목록 렌더링
+            renderInquiries();
+        });
+
+        // 문의 수정
+        function editInquiry(id) {
+            const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+            const inquiry = inquiries.find(i => i.id === id);
+            if (!inquiry) return;
+
+            const type = document.getElementById('inquiry-type');
+            const title = document.getElementById('inquiry-title');
+            const content = document.getElementById('inquiry-content');
+            const isSecret = document.getElementById('is-secret');
+            const secretForm = document.getElementById('secret-form');
+            const password = document.getElementById('secret-password');
+
+            type.value = inquiry.type;
+            title.value = inquiry.title;
+            content.value = inquiry.content;
+            isSecret.checked = inquiry.isSecret;
+            secretForm.style.display = inquiry.isSecret ? 'block' : 'none';
+            password.value = inquiry.password;
+
+            // 폼 제출 핸들러 변경
+            const form = document.getElementById('inquiry-form');
+            const originalSubmit = form.onsubmit;
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                
+                inquiry.type = type.value;
+                inquiry.title = title.value;
+                inquiry.content = content.value;
+                inquiry.isSecret = isSecret.checked;
+                inquiry.password = isSecret.checked ? password.value : '';
+                
+                localStorage.setItem('inquiries', JSON.stringify(inquiries));
+                alert('문의가 수정되었습니다.');
+                form.reset();
+                secretForm.style.display = 'none';
+                form.onsubmit = originalSubmit;
+                renderInquiries();
+            };
+        }
+
+        // 문의 삭제
+        function deleteInquiry(id) {
+            if (!confirm('정말 삭제하시겠습니까?')) return;
+            
+            const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+            const index = inquiries.findIndex(i => i.id === id);
+            if (index === -1) return;
+
+            inquiries.splice(index, 1);
+            localStorage.setItem('inquiries', JSON.stringify(inquiries));
+            renderInquiries();
+        }
+    </script>
+</body>
+</html> 

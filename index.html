@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코인타임 - 홈</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* 페이지별 추가 스타일 */
+        .coin-price {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .coin-price h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .coin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .coin-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .coin-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .coin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .coin-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .coin-symbol {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .coin-price-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .coin-change {
+            font-size: 1rem;
+        }
+
+        .coin-change.positive {
+            color: var(--success);
+        }
+
+        .coin-change.negative {
+            color: var(--danger);
+        }
+
+        .staking-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .staking-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .staking-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .staking-info h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .staking-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .staking-form {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .inquiry-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .inquiry-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .inquiry-form {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .coin-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .coin-price,
+            .staking-section,
+            .inquiry-section {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">코인타임</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">홈</a></li>
+                    <li><a href="staking-page.html" class="nav-link">스테이킹</a></li>
+                    <li><a href="inquiry-page.html" class="nav-link">1:1 문의</a></li>
+                    <li><a href="about-page.html" class="nav-link">회사 소개</a></li>
+                    <li id="user-nav-area">
+                        <a href="#" id="login-button">로그인</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-banner" style="background: url('image/04_1080.png') center/cover no-repeat; position: relative;">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <h1>쉽고 안전한 암호화폐 거래와 스테이킹<br><span class="highlight">코인타임</span>에서 시작하세요!</h1>
+        <p>실시간 시세, 간편한 스테이킹, 1:1 문의, 믿을 수 있는 서비스까지 한 곳에서!</p>
+        <a href="register-page.html" class="btn btn-lg btn-gradient">무료 회원가입</a>
+      </div>
+    </div>
+    <div class="service-cards-grid">
+      <div class="service-card">
+        <div class="service-icon"><img src="image/472865_441696_5757.jpg" alt="실시간 코인 시세"></div>
+        <h3>실시간 코인 시세</h3>
+        <p>10종 주요 코인의 실시간 시세, 변동률, 시가총액, 거래량을 한눈에 확인하세요.</p>
+        <a href="#coin-table" class="btn btn-secondary">시세 보기</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img src="image/284385_205862_553.jpg" alt="스테이킹"></div>
+        <h3>스테이킹</h3>
+        <p>간편하게 암호화폐를 예치하고, 매일 복리로 수익을 쌓으세요. 안전한 자산 관리!</p>
+        <a href="staking-page.html" class="btn btn-secondary">스테이킹 시작</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img src="image/558310_522624_835.png" alt="1:1 문의"></div>
+        <h3>1:1 문의</h3>
+        <p>궁금한 점은 언제든 문의하세요. 신속하고 친절하게 답변해드립니다.</p>
+        <a href="inquiry-page.html" class="btn btn-secondary">문의하기</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><img src="image/20201123154747765200.jpg" alt="회사소개"></div>
+        <h3>회사 소개</h3>
+        <p>코인타임의 비전, 연혁, 서비스, 보안 시스템 등 신뢰할 수 있는 정보를 확인하세요.</p>
+        <a href="about-page.html" class="btn btn-secondary">회사 소개</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="coin-table-container" id="coin-table">
+        <table class="coin-table">
+          <thead>
+            <tr>
+              <th style="text-align:center;">코인</th>
+              <th>가격 (KRW)</th>
+              <th>24h 변동률</th>
+              <th>시가총액</th>
+              <th>24h 거래량</th>
+            </tr>
+          </thead>
+          <tbody id="coin-table-body">
+            <!-- JS로 동적 생성 -->
+          </tbody>
+        </table>
+      </div>
+
+        <div class="staking-section">
+            <h2>스테이킹 서비스</h2>
+            <div class="staking-info">
+                <h3>스테이킹이란?</h3>
+                <p>스테이킹은 암호화폐를 예치하여 네트워크 보안에 기여하고 그에 대한 보상을 받는 서비스입니다.</p>
+                <p>우리의 스테이킹 서비스는 다음과 같은 특징을 가지고 있습니다:</p>
+                <ul>
+                    <li>일일 1%의 이자율 (복리 적용)</li>
+                    <li>유연한 예치 기간 설정</li>
+                    <li>안전한 자산 보관</li>
+                    <li>실시간 수익 확인</li>
+                </ul>
+            </div>
+            <div class="staking-form">
+                <form id="staking-form">
+                    <div class="form-group">
+                        <label for="coin-type">코인 선택</label>
+                        <select id="coin-type" class="form-control" required>
+                            <option value="">코인을 선택하세요</option>
+                            <option value="BTC">비트코인 (BTC)</option>
+                            <option value="ETH">이더리움 (ETH)</option>
+                            <option value="BNB">바이낸스 코인 (BNB)</option>
+                            <option value="SOL">솔라나 (SOL)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="staking-amount">스테이킹 금액</label>
+                        <input type="number" id="staking-amount" class="form-control" min="0.0001" step="0.0001" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="staking-period">스테이킹 기간 (일)</label>
+                        <input type="number" id="staking-period" class="form-control" min="1" max="365" required>
+                    </div>
+                    <button type="submit" class="btn">스테이킹 시작</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="inquiry-section">
+            <h2>1:1 문의</h2>
+            <div class="inquiry-form">
+                <form id="inquiry-form">
+                    <div class="form-group">
+                        <label for="inquiry-type">문의 유형</label>
+                        <select id="inquiry-type" class="form-control" required>
+                            <option value="">문의 유형을 선택하세요</option>
+                            <option value="account">계정 문의</option>
+                            <option value="staking">스테이킹 문의</option>
+                            <option value="trade">거래 문의</option>
+                            <option value="etc">기타 문의</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-title">제목</label>
+                        <input type="text" id="inquiry-title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-content">내용</label>
+                        <textarea id="inquiry-content" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="is-secret"> 비밀글 설정
+                        </label>
+                    </div>
+                    <div id="secret-form" class="secret-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="secret-password">비밀번호</label>
+                            <input type="password" id="secret-password" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">문의하기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 로그인 모달 -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>로그인</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">아이디</label>
+                    <input type="text" id="login-username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">비밀번호</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">로그인</button>
+                <a href="register-page.html" class="btn btn-secondary" style="margin-top: 1rem;">회원가입</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- 내 정보 관리 모달 -->
+    <div id="myinfo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>내 정보 관리</h2>
+            <form id="myinfo-form">
+                <div class="form-group">
+                    <label for="myinfo-username">아이디</label>
+                    <input type="text" id="myinfo-username" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="myinfo-email">이메일</label>
+                    <input type="email" id="myinfo-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="myinfo-phone">휴대폰 번호</label>
+                    <input type="tel" id="myinfo-phone" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">변경하기</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 비밀번호 변경 모달 -->
+    <div id="pwchange-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>비밀번호 변경</h2>
+            <form id="pwchange-form">
+                <div class="form-group">
+                    <label for="pw-old">기존 비밀번호</label>
+                    <input type="password" id="pw-old" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pw-new">새 비밀번호</label>
+                    <input type="password" id="pw-new" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pw-new-confirm">새 비밀번호 확인</label>
+                    <input type="password" id="pw-new-confirm" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">비밀번호 변경</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // 페이지별 추가 스크립트
+        document.addEventListener('DOMContentLoaded', function() {
+            const coinTableBody = document.getElementById('coin-table-body');
+            const stakingForm = document.getElementById('staking-form');
+            const inquiryForm = document.getElementById('inquiry-form');
+            const isSecretCheckbox = document.getElementById('is-secret');
+            const secretForm = document.getElementById('secret-form');
+
+            const coinIds = [
+              'bitcoin', 'ethereum', 'tether', 'ripple', 'binancecoin',
+              'solana', 'usd-coin', 'dogecoin', 'cardano', 'tron'
+            ];
+            const coinNames = {
+              bitcoin: '비트코인',
+              ethereum: '이더리움',
+              tether: '테더',
+              ripple: '리플코인',
+              binancecoin: '바이낸스 코인',
+              solana: '솔라나',
+              'usd-coin': 'USDC',
+              dogecoin: '도지코인',
+              cardano: '에이다',
+              tron: '트론'
+            };
+            async function updateCoinPrices() {
+              const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=krw&ids=${coinIds.join(',')}&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`;
+              try {
+                const response = await fetch(url);
+                const coins = await response.json();
+                const tbody = document.getElementById('coin-table-body');
+                tbody.innerHTML = '';
+                coins.forEach((coin) => {
+                  const change = coin.price_change_percentage_24h;
+                  const row = document.createElement('tr');
+                  row.innerHTML = `
+                    <td style="text-align:center;">
+                      <div class="coin-info" style="justify-content:center;">
+                        <img src="${coin.image}" alt="${coin.symbol}">
+                        <span>${coinNames[coin.id] || coin.name}</span>
+                        <span class="coin-symbol">${coin.symbol.toUpperCase()}</span>
+                      </div>
+                    </td>
+                    <td>${coin.current_price.toLocaleString()} KRW</td>
+                    <td class="${change >= 0 ? 'positive' : 'negative'}">
+                      ${change >= 0 ? '+' : ''}${change.toFixed(2)}%
+                    </td>
+                    <td>${coin.market_cap.toLocaleString()}</td>
+                    <td>${coin.total_volume.toLocaleString()}</td>
+                  `;
+                  tbody.appendChild(row);
+                });
+              } catch (e) {
+                document.getElementById('coin-table-body').innerHTML = '<tr><td colspan="5">시세 정보를 불러올 수 없습니다.</td></tr>';
+              }
+            }
+
+            // 스테이킹 폼 제출
+            stakingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const coinType = document.getElementById('coin-type').value;
+                const amount = parseFloat(document.getElementById('staking-amount').value);
+                const period = parseInt(document.getElementById('staking-period').value);
+
+                if (!coinType || !amount || !period) {
+                    alert('모든 필드를 입력해주세요.');
+                    return;
+                }
+
+                if (amount <= 0) {
+                    alert('스테이킹 금액은 0보다 커야 합니다.');
+                    return;
+                }
+
+                if (period < 1 || period > 365) {
+                    alert('스테이킹 기간은 1일에서 365일 사이여야 합니다.');
+                    return;
+                }
+
+                // localStorage에서 스테이킹 목록 가져오기
+                const stakings = JSON.parse(localStorage.getItem('stakings') || '[]');
+                
+                // 새 스테이킹 추가
+                const newStaking = {
+                    id: Date.now(),
+                    coinType,
+                    amount,
+                    period,
+                    startDate: new Date().toISOString(),
+                    userId: localStorage.getItem('currentUser')
+                };
+                
+                stakings.push(newStaking);
+                localStorage.setItem('stakings', JSON.stringify(stakings));
+                
+                alert('스테이킹이 시작되었습니다.');
+                stakingForm.reset();
+            });
+
+            // 문의 폼 제출
+            inquiryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const type = document.getElementById('inquiry-type').value;
+                const title = document.getElementById('inquiry-title').value;
+                const content = document.getElementById('inquiry-content').value;
+                const isSecret = isSecretCheckbox.checked;
+                const password = isSecret ? document.getElementById('secret-password').value : '';
+
+                if (!type || !title || !content || (isSecret && !password)) {
+                    alert('모든 필드를 입력해주세요.');
+                    return;
+                }
+
+                // localStorage에서 문의 목록 가져오기
+                const inquiries = JSON.parse(localStorage.getItem('inquiries') || '[]');
+                
+                // 새 문의 추가
+                const newInquiry = {
+                    id: Date.now(),
+                    type,
+                    title,
+                    content,
+                    isSecret,
+                    password,
+                    userId: localStorage.getItem('currentUser'),
+                    createdAt: new Date().toISOString()
+                };
+                
+                inquiries.push(newInquiry);
+                localStorage.setItem('inquiries', JSON.stringify(inquiries));
+                
+                alert('문의가 등록되었습니다.');
+                inquiryForm.reset();
+                secretForm.style.display = 'none';
+            });
+
+            // 비밀글 설정 토글
+            isSecretCheckbox.addEventListener('change', function() {
+                secretForm.style.display = this.checked ? 'block' : 'none';
+                document.getElementById('secret-password').required = this.checked;
+            });
+
+            // 초기 코인 시세 업데이트
+            updateCoinPrices();
+            // 1분마다 코인 시세 업데이트
+            setInterval(updateCoinPrices, 60000);
+        });
+    </script>
+</body>
+</html>
