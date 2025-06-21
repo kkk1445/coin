@@ -173,6 +173,27 @@
             }
         }
     </style>
+   <!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<!-- Firebase Auth -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<!-- Firebase Storage (필요시) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+<script>
+  // Firebase 설정 (admin.html과 동일하게)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAZ6NQB4cKfwUsuYHCZPC8vu7JIWuGBxVw",
+    authDomain: "coin-a4acc.firebaseapp.com",
+    projectId: "coin-a4acc",
+    storageBucket: "coin-a4acc.firebasestorage.app",
+    messagingSenderId: "119572038119",
+    appId: "1:119572038119:web:6caf066e9f88cd59b6bd42",
+    measurementId: "G-PKC3WQT5Q1"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script> 
 </head>
 <body>
     <header>
