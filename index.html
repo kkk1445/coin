@@ -466,48 +466,46 @@
               }
             }
 
-            // 스테이킹 폼 제출
-            stakingForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const coinType = document.getElementById('coin-type').value;
-                const amount = parseFloat(document.getElementById('staking-amount').value);
-                const period = parseInt(document.getElementById('staking-period').value);
+// Firestore 인스턴스 가져오기
+const db = firebase.firestore();
 
-                if (!coinType || !amount || !period) {
-                    alert('모든 필드를 입력해주세요.');
-                    return;
-                }
+// 스테이킹 폼 제출
+stakingForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const coinType = document.getElementById('coin-type').value;
+    const amount = parseFloat(document.getElementById('staking-amount').value);
+    const period = parseInt(document.getElementById('staking-period').value);
 
-                if (amount <= 0) {
-                    alert('스테이킹 금액은 0보다 커야 합니다.');
-                    return;
-                }
+    if (!coinType || !amount || !period) {
+        alert('모든 필드를 입력해주세요.');
+        return;
+    }
 
-                if (period < 1 || period > 365) {
-                    alert('스테이킹 기간은 1일에서 365일 사이여야 합니다.');
-                    return;
-                }
+    if (amount <= 0) {
+        alert('스테이킹 금액은 0보다 커야 합니다.');
+        return;
+    }
 
-                // localStorage에서 스테이킹 목록 가져오기
-                const stakings = JSON.parse(localStorage.getItem('stakings') || '[]');
-                
-                // 새 스테이킹 추가
-                const newStaking = {
-                    id: Date.now(),
-                    coinType,
-                    amount,
-                    period,
-                    startDate: new Date().toISOString(),
-                    userId: localStorage.getItem('currentUser')
-                };
-                
-                stakings.push(newStaking);
-                localStorage.setItem('stakings', JSON.stringify(stakings));
-                
-                alert('스테이킹이 시작되었습니다.');
-                stakingForm.reset();
-            });
+    if (period < 1 || period > 365) {
+        alert('스테이킹 기간은 1일에서 365일 사이여야 합니다.');
+        return;
+    }
+
+    // Firestore에 저장
+    db.collection('stakings').add({
+        coinType,
+        amount,
+        period,
+        startDate: new Date(),
+        userId: localStorage.getItem('currentUser')
+    }).then(() => {
+        alert('스테이킹이 시작되었습니다.');
+        stakingForm.reset();
+    }).catch((error) => {
+        alert('저장 실패: ' + error.message);
+    });
+});
 
             // 문의 폼 제출
             inquiryForm.addEventListener('submit', function(e) {
